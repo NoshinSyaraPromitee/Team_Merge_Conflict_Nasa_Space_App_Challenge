@@ -291,3 +291,7 @@ The real pipeline replaces it with one JSON file per site in `web/public/data/`,
 ## Development history
 
 We prototyped MoonScope before the hackathon (1-13 Nov 2026) in an earlier team repository, using public NASA data (LOLA terrain, SPICE ephemeris). This repository re-imports that prototype feature by feature; commits starting with "Import:" are that earlier work. Everything committed from 14 Nov 2026 onwards without that prefix was built during the hackathon. We used Claude (Anthropic) as a coding and design assistant; see the submission for details.
+
+## Credits
+
+3D Moon texture: three.js examples (github.com/mrdoob/three.js).
