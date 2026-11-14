@@ -213,9 +213,9 @@ def compute_site_ephemeris(
 
     # Round to 4 decimal places for compact, high-precision storage
     return {
-        "sun_az": [round(float(v), 4) for v in sun_az],
+        "sun_az": [round(float(v), 4) % 360.0 for v in sun_az],
         "sun_el": [round(float(v), 4) for v in sun_el],
-        "earth_az": [round(float(v), 4) for v in earth_az],
+        "earth_az": [round(float(v), 4) % 360.0 for v in earth_az],
         "earth_el": [round(float(v), 4) for v in earth_el],
     }
 

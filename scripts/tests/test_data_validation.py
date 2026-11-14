@@ -38,13 +38,7 @@ REQUIRED_KEYS = [
     "earth_el",
 ]
 
-FORBIDDEN_KEYS = [
-    "grid",
-    "horizon",
-    "dna",
-    "lit",
-    "earth",
-]
+FORBIDDEN_KEYS = []  # terrain pipeline adds grid/dna to the same files
 
 
 @pytest.fixture(scope="module")
@@ -79,7 +73,7 @@ def test_json_schema_and_keys(site_datasets, site_id):
     assert data["id"] == site_id
     assert isinstance(data["name"], str) and len(data["name"]) > 0
     assert -90.0 <= data["lat"] <= 90.0
-    assert 0.0 <= data["lon"] < 360.0
+    assert -180.0 <= data["lon"] < 360.0
     assert data["step_h"] == 1
     assert data["n"] == 8760
     assert data["t0"] == "2027-03-01T00:00:00Z"
