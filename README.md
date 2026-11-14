@@ -30,6 +30,11 @@
 
 ---
 
+
+https://github.com/user-attachments/assets/26313a9d-caf5-456e-b518-d8987bad884d
+
+
+
 At the lunar south pole the Sun never climbs more than a few degrees above the horizon. A ridge a few kilometres away can put a
 lander in shadow for days, and the same terrain can hide Earth and cut the radio link. A landing site that looks perfect on one date
 can kill the mission two days later.
