@@ -165,7 +165,7 @@ function Game({ game, setGame }: { game: RescueState; setGame: (g: RescueState |
             <p className="mt-2 text-sm text-text/80">
               {game.status === "saved"
                 ? `The lander survived ${RESCUE_HOURS} hours with ${game.soc.toFixed(0)} kWh left and ${game.scienceH} hours of science.`
-                : `The battery ran out at T+${game.t}h. Try driving toward the light earlier, or cut power before the shadow falls.`}
+                : `The battery ran out at T+${game.t}h. Tip: switch off instruments first, drive toward the light 3 times early, then tilt the panels. If it is still dark, hibernate.`}
             </p>
           </div>
         )}

@@ -30,6 +30,7 @@ export {
 } from "./recommendations";
 export {
   CRISES,
+  DRIVE_DROP_DEG,
   MOVES,
   RESCUE_HARDWARE,
   RESCUE_HOURS,
