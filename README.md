@@ -245,7 +245,7 @@ moonscope/
 
 </details>
 
-## 🛰️ Data
+##  Data
 
 > [!NOTE]
 > The prototype runs on **sample data** generated in `web/src/core/sites.ts`, shaped exactly like the real data will be:
