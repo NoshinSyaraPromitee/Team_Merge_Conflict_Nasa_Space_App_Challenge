@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   CRISES,
+  DRIVE_DROP_DEG,
   MOVES,
   RESCUE_HARDWARE,
   RESCUE_HOURS,
@@ -168,7 +169,7 @@ describe("Rescue mode (T-53)", () => {
       const s = startRescue(dustCrisis, params);
       const res = applyMove(s, "drive");
       expect(res.drives).toBe(1);
-      expect(res.horizonDrop).toBeCloseTo(0.1);
+      expect(res.horizonDrop).toBeCloseTo(DRIVE_DROP_DEG);
       expect(res.t).toBe(s.t + 2);
       expect(res.log.some((l) => l.text.includes("Drove 1 km toward the light (1/3)"))).toBe(true);
     });

@@ -6,6 +6,9 @@ export const RESCUE_HOURS = 72;
 // The game's lander is fixed hardware, so changing the planner's battery or power settings cannot make the game trivial.
 export const RESCUE_HARDWARE = { batteryKwh: 120, loadKw: 1.8, panelEff: 0.29 } as const;
 const PANEL_KW = 10 * 1.361;
+// Driving 1 km uphill gains roughly 100 m of height. From 100 m higher the horizon sits about 0.6 degrees lower
+// (horizon dip = sqrt(2h / Moon radius) = sqrt(2 x 0.1 km / 1737 km) = 0.011 rad), so each drive lowers it 0.5 degrees.
+export const DRIVE_DROP_DEG = 0.5;
 
 export type Crisis = { id: string; title: string; story: string; effScale: number; extraLoadKw: number; delayH: number };
 
@@ -139,7 +142,7 @@ export function applyMove(s: RescueState, m: Move): RescueState {
   const log = [...s.log];
   let n = { ...s };
   if (m === "drive") {
-    n = { ...n, drives: n.drives + 1, horizonDrop: n.horizonDrop + 0.1, soc: n.soc - 4 };
+    n = { ...n, drives: n.drives + 1, horizonDrop: n.horizonDrop + DRIVE_DROP_DEG, soc: n.soc - 4 };
     log.push({ t: n.t, tone: "ok", text: `Drove 1 km toward the light (${n.drives}/3). Horizon is lower.` });
     n = hourStep(hourStep({ ...n, log }));
     return { ...n, log };
