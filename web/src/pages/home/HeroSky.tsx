@@ -184,7 +184,7 @@ export function HeroSky() {
             />
           )}
 
-          {/* Lander: NASA Altair (web/public/Altair.svg), sitting on the foreground; glows when the Sun reaches it */}
+          {/* Rover: Project Altair, our university Mars rover project (web/public/Altair.svg), sitting on the foreground; glows when the Sun reaches it */}
           <image
             href={`${import.meta.env.BASE_URL}Altair.svg`}
             x={W / 2 - 60}
