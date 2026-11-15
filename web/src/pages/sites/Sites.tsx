@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { DNA_HOURS, SITES, getSite, siteDna, useMission, usingRealData } from "@/core";
-import { colors } from "@/ui";
+import { ModeTag, colors } from "@/ui";
 
 const R_OUT = 70;
 const R_IN = 54;
@@ -41,6 +41,7 @@ export function Sites() {
   return (
     <div className="mx-auto max-w-[1300px] px-5 pb-12 lg:px-8">
       <section className="py-8">
+        <ModeTag mode="guide" className="mb-3" />
         <h1 className="text-4xl font-extrabold tracking-tight md:text-5xl">Shadow DNA</h1>
         <p className="mt-3 max-w-[64ch] text-text/80">
           Every landing site has its own pattern of light and shadow. Each ring shows one lunar month: the outer ring is sunlight, the inner

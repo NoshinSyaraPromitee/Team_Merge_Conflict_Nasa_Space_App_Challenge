@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import clsx from "clsx";
 import { CALENDAR_DAYS, SITES, VERDICT_LABEL, landingDate, landingLabel, simulate, useMission } from "@/core";
-import { Select } from "@/ui";
+import { ModeTag, Select } from "@/ui";
 
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const COLOR = { ok: "bg-ok/25 border-ok/50", warn: "bg-warn/25 border-warn/50", fail: "bg-fail/25 border-fail/50" } as const;
@@ -34,6 +34,7 @@ export function Calendar() {
   return (
     <div className="mx-auto max-w-[1100px] px-5 pb-12 lg:px-8">
       <section className="py-8">
+        <ModeTag mode="guide" className="mb-3" />
         <h1 className="text-4xl font-extrabold tracking-tight md:text-5xl">Survival Calendar</h1>
         <p className="mt-3 max-w-[62ch] text-text/80">
           Every possible landing date for the next {CALENDAR_DAYS} days, tested with your current mission settings. Click a day to open it

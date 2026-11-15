@@ -1,11 +1,12 @@
 import { useRef } from "react";
 import { HelpCircle, X } from "lucide-react";
+import { ModeTag } from "@/ui";
 
 const FEATURES = [
-  ["Mission planner", "Set a site, date, battery and power use. See sunlight, Earth contact and the battery hour by hour.", "#/plan"],
-  ["Rescue Mode", "Something goes wrong after touchdown. Make the right moves in 60 seconds to keep the lander alive.", "#/rescue"],
-  ["Survival Calendar", "Sixty landing dates coloured by result, with the earliest date the mission fails.", "#/calendar"],
-  ["Shadow DNA", "A fingerprint of light and signal for every site, side by side.", "#/sites"],
+  ["Mission planner", "Set a site, date, battery and power use. See sunlight, Earth contact and the battery hour by hour.", "#/plan", "guide"],
+  ["Rescue Mode", "Something goes wrong after touchdown. Make the right moves to keep the lander alive for 3 days.", "#/rescue", "game"],
+  ["Survival Calendar", "Sixty landing dates coloured by result, with the earliest date the mission fails.", "#/calendar", "guide"],
+  ["Shadow DNA", "A fingerprint of light and signal for every site, side by side.", "#/sites", "guide"],
 ];
 
 const STEPS = [
@@ -61,15 +62,23 @@ export function AboutDialog() {
             enough contact with Earth, tests the plan against delays, and finds the smallest change that saves it.
           </p>
 
+          <p className="mt-3 max-w-[60ch] text-sm text-text/80">
+            <b>Survival guide:</b> the Planner, Survival Calendar and Shadow DNA use real NASA data. Use them to plan a mission.{" "}
+            <b>Game:</b> Rescue Mode is for practice and fun.
+          </p>
+
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            {FEATURES.map(([title, body, href]) => (
+            {FEATURES.map(([title, body, href, mode]) => (
               <a
                 key={title}
                 href={href}
                 onClick={close}
                 className="rounded-2xl border border-line bg-surface-2/50 p-4 transition hover:border-accent-soft"
               >
-                <h3 className="font-semibold text-sun">{title}</h3>
+                <div className="flex items-center justify-between gap-2">
+                  <h3 className="font-semibold text-sun">{title}</h3>
+                  <ModeTag mode={mode === "game" ? "game" : "guide"} />
+                </div>
                 <p className="mt-1 text-sm leading-relaxed text-text/75">{body}</p>
               </a>
             ))}

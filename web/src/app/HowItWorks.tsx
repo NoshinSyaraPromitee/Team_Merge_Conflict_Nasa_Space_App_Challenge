@@ -12,7 +12,7 @@ const SECTIONS: Section[] = [
   {
     id: "plan",
     label: "Planner",
-    intro: "Plan a Moon landing and check, hour by hour, if the lander gets enough sunlight for power and can still talk to Earth.",
+    intro: "Survival guide (real NASA data). Plan a Moon landing and check, hour by hour, if the lander gets enough sunlight for power and can still talk to Earth.",
     cards: [
       { title: "Lunar Map (2D / 3D)", what: "9 possible landing places near the Moon's south pole. Dot colour shows if your mission works there: green yes, amber maybe, red no.", helps: "See at a glance which places are safe, and pick one with a click." },
       { title: "Custom landing point", what: "Type a position (latitude and longitude). If it is close to one we have worked out, the plan moves there.", helps: "At the pole, moving just a few hundred metres can change how much sunlight you get." },
@@ -32,7 +32,7 @@ const SECTIONS: Section[] = [
   {
     id: "rescue",
     label: "Rescue Mode",
-    intro: "A short game: something goes wrong after landing, and you must keep the lander alive for 3 days.",
+    intro: "Game (for practice, not real planning). Something goes wrong after landing, and you must keep the lander alive for 3 days.",
     cards: [
       { title: "Pick a problem", what: "Dust on the solar panels, a late landing just before a long night, or a heater stuck on and wasting power.", helps: "These are real problems that mission teams plan for." },
       { title: "Battery and countdown", what: "The battery bar and 'Battery empty in X hours' change after every move you make.", helps: "Shows how much time each choice buys you." },
@@ -43,7 +43,7 @@ const SECTIONS: Section[] = [
   {
     id: "calendar",
     label: "Survival Calendar",
-    intro: "Every possible landing day for the next 2 months, checked with your settings.",
+    intro: "Survival guide. Every possible landing day for the next 2 months, checked with your settings.",
     cards: [
       { title: "Colours", what: "Green = safe, amber = risky, red = fails. A small dot keeps the colour showing when a day is selected.", helps: "Find the safe days to land at a glance." },
       { title: "First bad day", what: "The first red day has a red ring and is named above the calendar.", helps: "Tells you how late the landing can slip before it fails." },
@@ -53,7 +53,7 @@ const SECTIONS: Section[] = [
   {
     id: "sites",
     label: "Shadow DNA",
-    intro: "A light-and-signal fingerprint for every landing place, side by side.",
+    intro: "Survival guide. A light-and-signal fingerprint for every landing place, side by side.",
     cards: [
       { title: "Rings", what: "Outer ring = sunlight over a month, inner ring = contact with Earth. Gaps mean darkness or no signal.", helps: "Compare places without reading numbers." },
       { title: "Numbers", what: "How much of the time there is sunlight and Earth contact, the longest day, the longest night, and the longest time with no signal.", helps: "The longest night tells you how big the battery must be." },

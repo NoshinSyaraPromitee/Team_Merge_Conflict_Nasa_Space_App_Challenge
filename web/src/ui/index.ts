@@ -7,6 +7,7 @@ export { Slider } from "./Slider";
 export { Select } from "./Select";
 export { Button, buttonClass, type ButtonSize, type ButtonVariant } from "./Button";
 export { NavBar } from "./NavBar";
+export { MODE_TIP, ModeTag, type Mode } from "./ModeTag";
 export { PanelSkeleton, Skeleton } from "./Skeleton";
 export { PALETTE, colors, toneBg, toneText, type Tone } from "./theme";
 export type { Block } from "./block";
