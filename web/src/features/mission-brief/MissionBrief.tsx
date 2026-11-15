@@ -248,6 +248,7 @@ export function MissionBrief() {
       <button
         type="button"
         onClick={() => setOpen(true)}
+        data-tour="mission-brief"
         title="A one-page report of this plan that you can print or save as a PDF"
         className="flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-xs font-semibold text-text"
       >
