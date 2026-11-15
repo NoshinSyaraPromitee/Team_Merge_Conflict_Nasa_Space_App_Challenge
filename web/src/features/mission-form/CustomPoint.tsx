@@ -64,7 +64,6 @@ export function CustomPoint() {
           </>
         )}
         {(result?.kind === "invalid" || result?.kind === "outside") && <span className="text-fail">{result.reason}</span>}
-        {!result && !point && <>Enter a point near one of the 9 sites. Try {SITES[0].lat.toFixed(2)}, {SITES[0].lon.toFixed(2)}.</>}
       </div>
     </div>
   );
