@@ -253,7 +253,7 @@ describe("R3 Mission Simulator – Edge Cases", () => {
       const loaded = await loadRealSites("/corrupted-json/");
       expect(loaded).toBe(false);
       const problems = dataProblems();
-      expect(problems.some((p) => p.cause.includes("The file is not valid JSON"))).toBe(true);
+      expect(problems.some((p) => p.cause.includes("The file is broken"))).toBe(true);
     });
 
     it("handles invalid site schema format with fallback to sample data", async () => {
