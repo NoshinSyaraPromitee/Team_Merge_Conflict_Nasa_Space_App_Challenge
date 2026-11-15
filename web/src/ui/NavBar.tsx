@@ -1,12 +1,13 @@
 import type { ReactNode } from "react";
 import clsx from "clsx";
+import { MODE_TIP, type Mode } from "./ModeTag";
 
-const LINKS = [
+const LINKS: { href: string; label: string; mode?: Mode }[] = [
   { href: "#/", label: "Home" },
-  { href: "#/plan", label: "Planner" },
-  { href: "#/rescue", label: "Rescue Mode" },
-  { href: "#/calendar", label: "Survival Calendar" },
-  { href: "#/sites", label: "Shadow DNA" },
+  { href: "#/plan", label: "Planner", mode: "guide" },
+  { href: "#/rescue", label: "Rescue Mode", mode: "game" },
+  { href: "#/calendar", label: "Survival Calendar", mode: "guide" },
+  { href: "#/sites", label: "Shadow DNA", mode: "guide" },
 ];
 
 // Top navigation, rendered once by App above every page and kept at the top while scrolling.
@@ -27,6 +28,7 @@ export function NavBar({ current, extra, end }: { current: string; extra?: React
             <a
               key={l.href}
               href={l.href}
+              title={l.mode ? MODE_TIP[l.mode] : undefined}
               aria-current={current === l.href ? "page" : undefined}
               className={clsx(
                 "rounded-full px-3.5 py-1.5 text-sm font-medium transition",

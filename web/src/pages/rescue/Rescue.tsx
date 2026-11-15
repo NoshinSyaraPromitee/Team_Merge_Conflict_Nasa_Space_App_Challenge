@@ -19,7 +19,7 @@ import {
   type RescueState,
 } from "@/core";
 import { Panorama } from "@/features/lander-view";
-import { Select, toneText } from "@/ui";
+import { ModeTag, Select, toneText } from "@/ui";
 
 const TICK_MS = 450; // one mission hour every 0.45 s, so 72 h is about 30 s plus your moves
 
@@ -28,8 +28,12 @@ function Intro({ onStart }: { onStart: (c: Crisis) => void }) {
   const setParam = useMission((s) => s.setParam);
   return (
     <section className="py-10">
+      <ModeTag mode="game" className="mb-3" />
       <h1 className="text-4xl font-extrabold tracking-tight md:text-6xl">Rescue Mode</h1>
       <p className="mt-4 max-w-[60ch] text-lg text-text/80">
+        This part is a game for practice. To plan a real mission, use the{" "}
+        <a href="#/plan" className="font-semibold text-accent-soft underline-offset-2 hover:underline">Planner</a> (the survival guide).
+        <br />
         Your lander has just touched down and something has gone wrong. Night is falling. Keep the battery alive for 72 hours until help
         arrives. Every move you make re-runs the mission simulator.
       </p>

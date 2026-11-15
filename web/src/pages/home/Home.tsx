@@ -1,6 +1,6 @@
 import { SITES, VERDICT_LABEL, useMission, useSim } from "@/core";
 import { motion } from "motion/react";
-import { Badge } from "@/ui";
+import { Badge, MODE_TIP } from "@/ui";
 import { HeroSky } from "./HeroSky";
 
 export function Home() {
@@ -26,10 +26,10 @@ export function Home() {
               sunlight, Earth contact and battery, and finds the smallest change that saves a failing plan.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-3">
-              <a href="#/plan" className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white hover:bg-accent/85">
+              <a href="#/plan" title={MODE_TIP.guide} className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white hover:bg-accent/85">
                 Open the planner
               </a>
-              <a href="#/rescue" className="rounded-full border border-line px-6 py-3 text-sm font-semibold hover:border-muted">
+              <a href="#/rescue" title={MODE_TIP.game} className="rounded-full border border-line px-6 py-3 text-sm font-semibold hover:border-muted">
                 Try Rescue Mode
               </a>
               <span className="flex items-center gap-2 text-xs text-muted">
