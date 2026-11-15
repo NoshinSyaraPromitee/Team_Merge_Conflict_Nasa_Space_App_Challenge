@@ -45,7 +45,7 @@ export function Compare() {
               y={params.batteryKwh * RESERVE_FRACTION}
               stroke={colors.muted}
               strokeDasharray="4 4"
-              label={{ value: "Minimum reserve", fill: colors.muted, fontSize: 10, position: "insideBottomLeft" }}
+              label={{ value: "Safe minimum", fill: colors.muted, fontSize: 10, position: "insideBottomLeft" }}
             />
             {results.map((x, i) => (
               <Line
@@ -67,8 +67,8 @@ export function Compare() {
         <thead className="text-muted">
           <tr className="border-b border-line">
             <th className="py-2 font-medium">Scenario</th>
-            <th className="py-2 font-medium">Verdict</th>
-            <th className="py-2 text-right font-medium">Min battery</th>
+            <th className="py-2 font-medium">Result</th>
+            <th className="py-2 text-right font-medium">Lowest battery</th>
             <th className="py-2 text-right font-medium">Earth link</th>
           </tr>
         </thead>

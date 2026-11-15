@@ -2,7 +2,6 @@
 // Generates verified, actionable recommendations based on actual simulation results.
 import { SITES } from "./sites";
 import { simulate, findSmallestDelay, findBestSite } from "./simulate";
-import { VERDICT_LABEL } from "./types";
 import type { MissionParams, SimResult, Verdict } from "./types";
 
 export type RecommendationCategory = "date" | "site" | "battery" | "power" | "panel";
@@ -47,9 +46,9 @@ export function getRecommendations(params: MissionParams, baseResult?: SimResult
         recommendations.push({
           id: "proactive-battery",
           category: "battery",
-          title: "Increase battery capacity for extra margin",
-          reason: `Lowest battery charge reaches ${current.minSoc.toFixed(1)} kWh (close to safe reserve of ${current.reserve.toFixed(1)} kWh). Extra capacity adds resilience against longer eclipses.`,
-          improvement: `Increases minimum SoC from ${current.minSoc.toFixed(1)} kWh to ${testRes.minSoc.toFixed(1)} kWh (+${(testRes.minSoc - current.minSoc).toFixed(1)} kWh buffer).`,
+          title: "Add battery for extra safety",
+          reason: `The battery gets as low as ${current.minSoc.toFixed(1)} kWh, close to the safe minimum of ${current.reserve.toFixed(1)} kWh. A bigger battery gives more room if a shadow lasts longer.`,
+          improvement: `lowest battery goes from ${current.minSoc.toFixed(1)} to ${testRes.minSoc.toFixed(1)} kWh`,
           changes: { batteryKwh: upgradeKwh },
           result: testRes,
         });
@@ -59,7 +58,7 @@ export function getRecommendations(params: MissionParams, baseResult?: SimResult
     return {
       isSafe: true,
       verdict: "ok",
-      message: `Plan is FEASIBLE. Battery never drops below ${current.minSoc.toFixed(1)} kWh (reserve floor: ${current.reserve.toFixed(1)} kWh) and Earth communication link is active ${Math.round(current.earthOkPct * 100)}% of the mission.`,
+      message: `This plan works. The battery never goes below ${current.minSoc.toFixed(1)} kWh (safe minimum: ${current.reserve.toFixed(1)} kWh) and the lander can talk to Earth ${Math.round(current.earthOkPct * 100)}% of the time.`,
       recommendations,
     };
   }
@@ -68,10 +67,10 @@ export function getRecommendations(params: MissionParams, baseResult?: SimResult
   const day = Math.floor((current.failHour ?? 0) / 24) + 1;
   const failureReason =
     current.cause === "power"
-      ? `Battery depleted below safe reserve (${current.reserve.toFixed(0)} kWh) on day ${day}. Lunar surface shadow prevents solar array recharging.`
+      ? `On day ${day} the battery drops below the safe minimum (${current.reserve.toFixed(0)} kWh). The lander is in shadow, so the solar panels cannot recharge it.`
       : current.cause === "comm"
-        ? `Daily Earth communication fell below required ${params.commHoursReq} h/day on day ${day}. Terrain obstruction blocked line of sight.`
-        : `Mission is at risk: minimum SoC (${current.minSoc.toFixed(1)} kWh) is close to reserve, or communication margin is narrow.`;
+        ? `On day ${day} the lander gets less than the ${params.commHoursReq} h of Earth contact it needs per day. Hills block the view of Earth.`
+        : `The plan only just works: the battery gets as low as ${current.minSoc.toFixed(1)} kWh, close to the safe minimum, or there is barely enough Earth contact.`;
 
   // 1. Landing date adjustment (timing fix)
   const delayFix = findSmallestDelay(params);
@@ -83,9 +82,9 @@ export function getRecommendations(params: MissionParams, baseResult?: SimResult
       recommendations.push({
         id: "fix-delay",
         category: "date",
-        title: "Choose a safer landing date",
-        reason: `Shifting touchdown by ${delayFix.delayH / 24} day(s) aligns the mission with an extended solar illumination window and avoids critical shadow periods.`,
-        improvement: `Elevates verdict to ${VERDICT_LABEL[testRes.verdict]} and raises lowest battery SoC to ${testRes.minSoc.toFixed(1)} kWh.`,
+        title: "Land on a different day",
+        reason: `Landing ${delayFix.delayH / 24} day(s) later moves the mission into a longer sunny period and avoids the worst shadows.`,
+        improvement: `land ${delayFix.delayH / 24} day(s) later, lowest battery ${testRes.minSoc.toFixed(1)} kWh`,
         changes: { delayH: newDelay },
         result: testRes,
       });
@@ -102,9 +101,9 @@ export function getRecommendations(params: MissionParams, baseResult?: SimResult
       recommendations.push({
         id: "fix-site",
         category: "site",
-        title: "Choose a better landing site",
-        reason: `${siteName} offers higher terrain clearance, reducing shadow depth and improving direct line-of-sight to Earth.`,
-        improvement: `Verdict improves to ${VERDICT_LABEL[testRes.verdict]} with ${Math.round(testRes.earthOkPct * 100)}% Earth contact and ${testRes.minSoc.toFixed(1)} kWh minimum SoC.`,
+        title: "Land at a different site",
+        reason: `${siteName} gets more sunlight or a clearer view of Earth for this plan.`,
+        improvement: `move to ${siteName}, Earth contact ${Math.round(testRes.earthOkPct * 100)}%, lowest battery ${testRes.minSoc.toFixed(1)} kWh`,
         changes: { siteIdx: siteFix.siteIdx },
         result: testRes,
       });
@@ -122,9 +121,9 @@ export function getRecommendations(params: MissionParams, baseResult?: SimResult
           recommendations.push({
             id: "fix-battery",
             category: "battery",
-            title: "Increase battery capacity",
-            reason: `A larger battery bank stores sufficient energy to bridge the shadow duration without penetrating the 25% safety reserve threshold.`,
-            improvement: `Increasing capacity to ${testKwh} kWh (+${extra} kWh) brings minimum SoC to ${testRes.minSoc.toFixed(1)} kWh (${VERDICT_LABEL[testRes.verdict]}).`,
+            title: "Use a bigger battery",
+            reason: `A bigger battery stores enough power to get through the shadow without dropping below the safe minimum (25% of the battery).`,
+            improvement: `${testKwh} kWh (+${extra} kWh), lowest battery ${testRes.minSoc.toFixed(1)} kWh`,
             changes: { batteryKwh: testKwh },
             result: testRes,
           });
@@ -143,9 +142,9 @@ export function getRecommendations(params: MissionParams, baseResult?: SimResult
         recommendations.push({
           id: "fix-power",
           category: "power",
-          title: "Reduce power consumption",
-          reason: `Lowering non-essential payload and thermal heater load slows battery drain during sunless periods.`,
-          improvement: `Reducing power draw from ${params.loadKw.toFixed(1)} kW to ${testLoad.toFixed(1)} kW prevents failure and keeps SoC above ${testRes.minSoc.toFixed(1)} kWh.`,
+          title: "Use less power",
+          reason: `Turning off instruments and heaters that are not essential makes the battery last longer in the dark.`,
+          improvement: `from ${params.loadKw.toFixed(1)} kW to ${testLoad.toFixed(1)} kW, lowest battery ${testRes.minSoc.toFixed(1)} kWh`,
           changes: { loadKw: testLoad },
           result: testRes,
         });
@@ -163,9 +162,9 @@ export function getRecommendations(params: MissionParams, baseResult?: SimResult
         recommendations.push({
           id: "fix-panel",
           category: "panel",
-          title: "Improve solar panel efficiency",
-          reason: `Upgrading to higher efficiency solar cells produces higher wattage during lit periods, accelerating battery replenishment.`,
-          improvement: `Raising cell efficiency from ${Math.round(params.panelEff * 100)}% to ${Math.round(testEff * 100)}% keeps the mission viable (${VERDICT_LABEL[testRes.verdict]}).`,
+          title: "Use better solar panels",
+          reason: `Better panels make more power in sunlight, so the battery refills faster.`,
+          improvement: `panel efficiency from ${Math.round(params.panelEff * 100)}% to ${Math.round(testEff * 100)}%`,
           changes: { panelEff: testEff },
           result: testRes,
         });

@@ -31,7 +31,7 @@ describe("T-37: getRecommendations – Safe Missions", () => {
     const advice = getRecommendations(base);
     expect(advice.isSafe).toBe(true);
     expect(advice.verdict).toBe("ok");
-    expect(advice.message).toContain("FEASIBLE");
+    expect(advice.message).toContain("This plan works");
   });
 
   it("does not mutate original params object", () => {
@@ -92,7 +92,7 @@ describe("T-37: getRecommendations – Communication Failure", () => {
     const advice = getRecommendations(commFailParams);
     expect(advice.isSafe).toBe(false);
     expect(advice.verdict).toBe("fail");
-    expect(advice.message.toLowerCase()).toContain("communication");
+    expect(advice.message.toLowerCase()).toContain("earth contact");
   });
 
   it("suggests verified alternative site or date to resolve comm blockage", () => {

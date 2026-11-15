@@ -64,7 +64,7 @@ export function Sites() {
                 <dd className="num text-right">{dna.longestNightH} h</dd>
                 <dt className="text-muted">Longest signal loss</dt>
                 <dd className="num text-right">{dna.longestBlackoutH} h</dd>
-                <dt className="text-muted">Light changes</dt>
+                <dt className="text-muted">Sunrises + sunsets</dt>
                 <dd className="num text-right">{dna.switches}</dd>
               </dl>
               <button

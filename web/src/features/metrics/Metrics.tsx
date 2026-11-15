@@ -26,13 +26,13 @@ export function Metrics() {
         value={r.minSoc.toFixed(0)}
         unit="kWh"
         tone={r.minSoc < r.reserve ? "fail" : r.minSoc < r.reserve * 1.5 ? "warn" : "ok"}
-        hint={`Reserve ${r.reserve.toFixed(0)} kWh`}
+        hint={`Safe minimum ${r.reserve.toFixed(0)} kWh`}
       />
       <StatTile
-        label="Verdict"
+        label="Result"
         value={VERDICT_LABEL[r.verdict]}
         tone={r.verdict}
-        hint={r.failHour !== null ? `Fails on day ${Math.floor(r.failHour / 24) + 1} (${r.cause})` : "All rules pass"}
+        hint={r.failHour !== null ? `Fails on day ${Math.floor(r.failHour / 24) + 1} (${r.cause === "power" ? "battery" : "Earth contact"})` : "No problems found"}
       />
     </div>
   );

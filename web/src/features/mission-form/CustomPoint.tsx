@@ -53,14 +53,14 @@ export function CustomPoint() {
 
       <div aria-live="polite" className="text-[11px] leading-relaxed text-muted">
         {result?.kind === "snapped" && (
-          <>Using the nearest computed point, {Math.round(result.distanceKm * 1000)} m away. Every panel now shows this point.</>
+          <>Using the closest point we have data for, {Math.round(result.distanceKm * 1000)} m away. Every panel now shows this point.</>
         )}
         {result?.kind === "far" && (
           <>
-            <b className="text-warn">Terrain for this point isn't computed yet.</b> The nearest computed area is {SITES[result.siteIdx].name},{" "}
-            {result.distanceKm.toFixed(1)} km away (each site covers a 4 x 4 km grid, points within {SNAP_KM} km snap to it). To add this point:
+            <b className="text-warn">We don't have terrain data for this point yet.</b> The closest site with data is {SITES[result.siteIdx].name},{" "}
+            {result.distanceKm.toFixed(1)} km away (we only have data within {SNAP_KM} km of each site). To add this point:
             put it in <code className="num">pipeline/sites.yaml</code> and run <code className="num">pipeline/run_all.bat</code>; it computes the
-            horizon from NASA LOLA terrain and the Sun/Earth positions for every hour.
+            hills around it from NASA LOLA data and where the Sun and Earth are every hour.
           </>
         )}
         {(result?.kind === "invalid" || result?.kind === "outside") && <span className="text-fail">{result.reason}</span>}

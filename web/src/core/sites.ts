@@ -55,7 +55,7 @@ async function loadOne(baseUrl: string, id: string, name: string): Promise<SiteD
   try {
     json = await r.json();
   } catch {
-    return { site: name, file, cause: "The file is not valid JSON (it may be cut off or half-written).", fix: PIPELINE_FIX };
+    return { site: name, file, cause: "The file is broken (it may be cut off or only half-saved).", fix: PIPELINE_FIX };
   }
   const why = explainSiteFile(json);
   if (why) return { site: name, file, cause: `The file is in the wrong format: ${why}.`, fix: `${PIPELINE_FIX} The expected format is in docs/METHOD.md.` };

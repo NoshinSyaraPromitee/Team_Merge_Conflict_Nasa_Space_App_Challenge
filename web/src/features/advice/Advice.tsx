@@ -47,7 +47,7 @@ export function Advice() {
           </span>
         </p>
         <p className="text-xs text-muted">
-          Stress test: survives <b className="text-text">{robust} of 3</b> launch delays (1, 3 and 5 days).
+          Delay test: the plan still works for <b className="text-text">{robust} of 3</b> late landings (1, 3 or 5 days late).
           {robust < 3 && " Keep a backup date or site ready."}
         </p>
         {advice.recommendations.map((rec) => {
@@ -56,7 +56,7 @@ export function Advice() {
             <FixRow
               key={rec.id}
               icon={Icon}
-              text={`${rec.title} (${rec.improvement})`}
+              text={`${rec.title}: ${rec.improvement}`}
               result={rec.result}
               onApply={() => patch(rec.changes)}
             />
@@ -71,7 +71,7 @@ export function Advice() {
       <p className="flex items-start gap-2">
         <AlertTriangle className="mt-0.5 shrink-0 text-fail" size={18} />
         <span>
-          <b>Mission fails ({r.cause === "power" ? "power" : "communication"}).</b> {advice.message}
+          <b>{r.verdict === "warn" ? "Mission at risk." : r.cause === "power" ? "Mission fails: the battery runs out." : "Mission fails: not enough Earth contact."}</b> {advice.message}
         </span>
       </p>
 
