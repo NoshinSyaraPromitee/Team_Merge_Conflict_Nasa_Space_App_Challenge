@@ -9,6 +9,7 @@ type Step = { target: string; title: string; body: string };
 const TOURS: Record<string, Step[]> = {
   plan: [
     { target: "verdict", title: "Will the mission survive?", body: "Green FEASIBLE means yes, with room to spare. Amber AT RISK means it only just makes it. Red INFEASIBLE means no: the battery runs too low, or the lander cannot talk to Earth for long enough." },
+    { target: "mission-brief", title: "Take the plan with you", body: "Mission brief makes a one-page report of this plan: the site, the date, the result, the key numbers and the best fixes. Print it or save it as a PDF to share with your team." },
     { target: "moon-globe", title: "Choose where to land", body: "These are 9 places near the Moon's south pole. Each dot's colour shows if the mission works there: green yes, amber maybe, red no. Click a place to choose it. Use the buttons to switch between a flat map and a 3D Moon." },
     { target: "mission-form", title: "Set up your lander", body: "Pick the landing day, how big the battery is, how much power the lander uses, how good its solar panels are, how many hours a day it must talk to Earth, and how many days it must last. Change anything and the whole page updates." },
     { target: "local-sky", title: "The sky above the lander", body: "Imagine lying on the ground looking up. The outer edge is the horizon and the middle is straight up. Grey is the mountains. The yellow dot is the Sun and the blue dot is Earth. If the Sun is behind the grey, no solar power. If Earth is behind it, no radio." },
@@ -17,13 +18,14 @@ const TOURS: Record<string, Step[]> = {
     { target: "lander-view", title: "What the lander sees", body: "A full circle view around the lander, made from real NASA height maps of the Moon. Watch the Sun slip behind a mountain: that is when the battery starts to drain." },
     { target: "what-if", title: "What if something goes wrong?", body: "Try changes like landing 5 days late, weaker solar panels, or landing 2 km away. You can test up to 4 at once." },
     { target: "compare", title: "Compare the plans", body: "Your plan and each 'what if' side by side, with their battery levels. You can see straight away which change helps and which one hurts." },
+    { target: "landing-check", title: "What if we land a bit off target?", body: "A lander can touch down up to about 1 km from where it aims. This map runs your whole mission again at 25 spots around the site, 1 km apart. Green works, red fails. Press 'Try a landing' to drop the lander with a random miss and see if it survives." },
     { target: "advice", title: "How to fix it", body: "If the plan fails, this says why and suggests the smallest change that saves it, like landing a bit later or picking another place. One click applies it." },
     { target: "alerts", title: "What will happen", body: "A simple list of events: sunrise, sunset, Earth going out of view, battery getting low. Click one to jump to that moment." },
     { target: "ask", title: "Just ask", body: "Type what you want in plain words, like 'land 3 days later with a bigger battery', and MoonScope changes the plan for you." },
   ],
   rescue: [
     { target: "rescue-site", title: "Pick a place", body: "The game uses the real sunlight and Earth view of the place you choose." },
-    { target: "crises", title: "Pick a problem", body: "Something goes wrong after landing: dust on the panels, a late landing just before a long night, or a heater stuck on. Then choose what to do (drive toward the sun, turn things off, sleep, tilt the panels) to keep the battery alive for 3 days." },
+    { target: "crises", title: "Pick a problem", body: "Something goes wrong after landing: dust on the panels, a late landing just before a long night, or a heater stuck on. Then choose what to do (drive toward the sun, turn things off, sleep, tilt the panels) to keep the battery alive for 3 days. The rover in the view acts out every move. A good start: switch off instruments, drive 3 times, then tilt the panels." },
   ],
   calendar: [
     { target: "calendar-grid", title: "Which days are safe to land?", body: "Every possible landing day for the next 2 months, checked with your settings. Green is safe, amber is risky, red fails. The first red day has a red ring. Click any day to see it in detail." },
