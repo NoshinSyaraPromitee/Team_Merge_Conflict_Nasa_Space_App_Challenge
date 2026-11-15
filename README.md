@@ -285,7 +285,7 @@ The real pipeline replaces it with one JSON file per site in `web/public/data/`,
 ---
 
 <p align="center">
-  <sub>Built for the NASA Space Apps Challenge 2026 · Made with 🌙 by Team Merge_Conflict</sub>
+  <sub>Built for the NASA Space Apps Challenge 2026 · Made with ❤️ by Team Merge_Conflict</sub>
 </p>
 
 ## Development history
