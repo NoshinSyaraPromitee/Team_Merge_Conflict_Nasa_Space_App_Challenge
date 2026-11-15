@@ -18,7 +18,7 @@ import {
   type Move,
   type RescueState,
 } from "@/core";
-import { Panorama } from "@/features/lander-view";
+import { Panorama, RescueRover } from "@/features/lander-view";
 import { ModeTag, Select, toneText } from "@/ui";
 
 const TICK_MS = 450; // one mission hour every 0.45 s, so 72 h is about 30 s plus your moves
@@ -112,7 +112,12 @@ function Game({ game, setGame }: { game: RescueState; setGame: (g: RescueState |
 
         {/* On phones the panorama drops below the moves so players can act without scrolling */}
         <div className="order-last rounded-2xl border border-line bg-surface p-4 lg:order-none">
-          <Panorama siteIdx={game.params.siteIdx} hour={game.startH + game.t} horizonDrop={game.horizonDrop} />
+          <div className="relative">
+            <Panorama siteIdx={game.params.siteIdx} hour={game.startH + game.t} horizonDrop={game.horizonDrop} />
+            <div className="absolute inset-x-0 top-0 h-40">
+              <RescueRover game={game} />
+            </div>
+          </div>
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2">
