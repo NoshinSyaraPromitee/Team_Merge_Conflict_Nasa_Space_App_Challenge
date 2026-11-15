@@ -14,6 +14,7 @@ import { whatIf } from "@/features/what-if";
 import { advice } from "@/features/advice";
 import { alerts } from "@/features/alerts";
 import { ask } from "@/features/ask";
+import { landingCheck } from "@/features/landing-check";
 
 const span = (b: Block, cls: string): Block => ({ ...b, span: cls });
 
@@ -30,6 +31,8 @@ export const BLOCKS: Block[] = [
   // Row 4: build what-if scenarios, compare them with the plan
   span(whatIf, "lg:col-span-4"),
   span(compare, "lg:col-span-8"),
+  // Row 4b: does the plan survive a small landing miss?
+  span(landingCheck, "lg:col-span-12"),
   // Row 5: verdict, events, questions
   span(advice, "lg:col-span-4"),
   span(alerts, "lg:col-span-4"),
